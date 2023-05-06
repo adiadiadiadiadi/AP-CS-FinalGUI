@@ -3,21 +3,35 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.lang.reflect.Array;
+import java.awt.image.BufferedImage;
+import javax.swing.*;
+import java.awt.Image;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-public class Render extends JPanel {
-   @Override
-   public void paint(Graphics g) {
-      Graphics2D graphic2d = (Graphics2D) g;
-      graphic2d.setColor(Color.BLACK);
-      graphic2d.drawOval(40,40,10,10);
+
+public class Render extends JFrame {  
+   private ArrayList<Particle> particleRender;
+   public Render(ArrayList<Particle> particles) {
+      super("My Frame");
+      particleRender = particles;
+
+      // You can set the content pane of the frame to your custom class.
+      setContentPane(new DrawPane());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(800, 800);
+        setVisible(true); 
    }
-   public static void main (String[] args) {
-      JFrame frame = new JFrame("Demo");
-      frame.add(new Render());
-      frame.setSize(1500, 700);
-      frame.setVisible(true);
-      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+   // Create a component that you can actually draw on.
+   class DrawPane extends JPanel {
+        public void paintComponent(Graphics g) {
+            for (Particle particle : particleRender) {
+               g.drawOval((int) particle.getPosition()[0], (int) particle.getPosition()[1], 20, 20);
+               System.out.println(particle.getPosition()[0]);
+               System.out.println(particle.getVelocity()[0]);
+               System.out.println(particle.getAcceleration()[0]);
+            }
+        }
    }
 }
