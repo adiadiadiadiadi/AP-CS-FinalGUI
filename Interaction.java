@@ -8,11 +8,19 @@ public class Interaction {
             for (int j = 0; j < particles.size(); j++) {
                 if (i==j) {continue;}
                 double[] distance = Matrix.matrixSubtract(particles.get(i).getPosition(), particles.get(j).getPosition());
-                //System.out.print(distance[0]);
-                //System.out.println(distance[1]);
-                totalForce = Matrix.matrixAdd(totalForce, Matrix.force(distance));
-                //System.out.print(totalForce[0]);
-                //System.out.println(totalForce[1]);
+                
+                if (Matrix.force(distance)==null) {
+                    //collision code if it gets too close
+                    double[] v1 = particles.get(i).getVelocity();
+                    double[] v2 = particles.get(j).getVelocity();
+                    particles.get(i).setVelocity(v2);
+                    particles.get(j).setVelocity(v1);
+                    System.out.println("did a thing");
+                }
+                else {
+                    totalForce = Matrix.matrixAdd(totalForce, Matrix.force(distance));
+                }
+
             }
             particles.get(i).setAcceleration(totalForce);
             newParticles.add(particles.get(i));
