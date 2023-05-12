@@ -27,7 +27,7 @@ public class Render extends JFrame {
    class DrawPane extends JPanel {
         public void paintComponent(Graphics g) {
             for (Particle particle : particleRender) {
-               g.drawOval((int) particle.getPosition()[0], (int) particle.getPosition()[1], 20, 20);
+               g.drawOval((int) particle.getPosition()[0], (int) particle.getPosition()[1], 10, 10);
                System.out.println(particle.getPosition()[0]);
                System.out.println(particle.getVelocity()[0]);
                System.out.println(particle.getAcceleration()[0]);

@@ -17,8 +17,11 @@ public class Matrix {
 
     public static double[] force(double[] d) {
         double[] forceMatrix = new double[d.length];
+        if (d[0] < 5 && d[1] < 5) {
+            return d;
+        }
         for (int i = 0; i < d.length; i++) {
-            forceMatrix[i] = 1/(((double) d[i])*Math.abs((double) d[i]));
+            forceMatrix[i] = -10000/(((double) d[i])*Math.abs((double) d[i]));
         }
         return forceMatrix;
     }
