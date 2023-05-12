@@ -3,10 +3,11 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class MyPanel extends JPanel{
+    private Color color = Color.BLACK;
     ArrayList<Particle> particles = new ArrayList<>();
     
     MyPanel(){  
-        this.setPreferredSize(new Dimension(800,800));
+        this.setPreferredSize(new Dimension(2000,1000));
     }
 
     public void setParticles(ArrayList<Particle> a) {
@@ -18,6 +19,7 @@ public class MyPanel extends JPanel{
     Graphics2D g2D = (Graphics2D) g;
 
     for (Particle particle : particles) {
+        //g.setColor(Color.decode(particle.getColor()));
         g2D.drawOval((int) particle.getPosition()[0], (int) particle.getPosition()[1], 10, 10);
     }
     }

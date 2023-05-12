@@ -9,16 +9,29 @@ public class Interaction {
                 if (i==j) {continue;}
                 double[] distance = Matrix.matrixSubtract(particles.get(i).getPosition(), particles.get(j).getPosition());
                 
-                if (Matrix.force(distance)==null) {
+                if (Matrix.force(distance, particles.get(j).getMass())==null) {
                     //collision code if it gets too close
                     double[] v1 = particles.get(i).getVelocity();
                     double[] v2 = particles.get(j).getVelocity();
-                    particles.get(i).setVelocity(v2);
-                    particles.get(j).setVelocity(v1);
-                    System.out.println("did a thing");
+                    double[] avgV = Matrix.matrixAdd(v1, v2);
+                    double combinedMass = particles.get(i).getMass() + particles.get(j).getMass();
+                    avgV[0] /= combinedMass;
+                    avgV[1] /= combinedMass;
+                    
+                    particles.add(new Particle(particles.get(i).getPosition()[0], particles.get(i).getPosition()[1], avgV[0], avgV[1], combinedMass));
+                    if (i < j) {
+                        particles.remove(particles.get(i));
+                        particles.remove(particles.get(j-1));
+                    }
+                    else {
+                        particles.remove(particles.get(i-1));
+                        particles.remove(particles.get(j));
+                    }
+                    System.out.println("collided");
+                    break;
                 }
                 else {
-                    totalForce = Matrix.matrixAdd(totalForce, Matrix.force(distance));
+                    totalForce = Matrix.matrixAdd(totalForce, Matrix.force(distance, particles.get(j).getMass()));
                 }
 
             }

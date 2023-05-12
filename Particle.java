@@ -2,12 +2,18 @@ public class Particle {
     private double[] position = new double[2];
     private double[] velocity = new double[2];
     private double[] acceleration = new double[2];
+    private double mass;
 
-    public Particle(double a, double b, double c, double d) {
+    public Particle(double a, double b, double c, double d, double e) {
         position[0] = a;
         position[1] = b;
         velocity[0] = c;
         velocity[1] = d;
+        mass = e;
+    }
+
+    public double getMass() {
+        return mass;
     }
 
     public double[] getPosition() {
@@ -20,6 +26,10 @@ public class Particle {
 
     public double[] getAcceleration() {
         return acceleration;
+    }
+
+    public void setMass(double a) {
+        mass = a;
     }
 
     public void setPosition(double[] a) {
@@ -40,7 +50,5 @@ public class Particle {
 
     public void updateVelocity() {
         velocity = Matrix.matrixAdd(velocity, acceleration);
-        //System.out.print(velocity[0]);
-        //System.out.println(velocity[1]);
     }
 }
