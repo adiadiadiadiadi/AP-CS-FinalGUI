@@ -21,7 +21,7 @@ public class Matrix {
           return null;
         }
         for (int i = 0; i < d.length; i++) {
-            forceMatrix[i] = -10*m2/(((double) d[i])*Math.abs((double) d[i]));
+            forceMatrix[i] = (-10*m2/(((double) d[i])*Math.abs((double) d[i])));
         }
         return forceMatrix;
     }
