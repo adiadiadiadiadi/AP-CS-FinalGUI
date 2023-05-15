@@ -45,7 +45,8 @@ public class Particle {
     }
 
     public void updatePosition() {
-        position = Matrix.matrixAdd(position, velocity);
+        double[] c = {};
+        position = Matrix.matrixAddRecursion(position, velocity, c); //RECURSION INSTANCE
     }
 
     public void updateVelocity() {

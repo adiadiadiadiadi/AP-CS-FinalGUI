@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Matrix {
     public static double[] matrixAdd(double[] a, double[] b) {
         double[] additionMatrix = new double[a.length];
@@ -5,6 +7,20 @@ public class Matrix {
             additionMatrix[i] = (double) a[i] + (double) b[i];
         }
         return additionMatrix;
+    }
+
+    //RECURSION
+    public static double[] matrixAddRecursion(double[] a, double[] b, double[] output) {
+              
+        // Base case: if all elements have been processed, return the result
+        if (output.length >= a.length) {
+            return output;
+        }
+        double sum = a[output.length] + b[output.length];
+        double[] arr = Arrays.copyOf(output, output.length + 1);
+        arr[arr.length - 1] = sum; 
+        
+        return matrixAddRecursion(a, b, arr);
     }
 
     public static double[] matrixSubtract(double[] a, double[] b) {
